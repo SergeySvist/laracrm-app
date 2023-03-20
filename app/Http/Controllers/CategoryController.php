@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Category\CreateCategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Traits\ApiResponser;
@@ -26,8 +27,8 @@ class CategoryController extends Controller
 
     }
 
-    public function create(Request $request){
-
+    public function create(CreateCategoryRequest $request){
+        dd('create');
     }
 
 
