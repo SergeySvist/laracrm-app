@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Category\CategoryPatchRequest;
 use App\Http\Requests\Category\CreateCategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Traits\ApiResponser;
+use Symfony\Component\HttpFoundation\Response;
 
 class CategoryController extends Controller
 {
@@ -19,16 +21,23 @@ class CategoryController extends Controller
 
     }
 
-    public function update(Category $category){
+    public function update(Category $category,  CategoryPatchRequest $request){
+        $category->update($request->validated());
 
+        return $this->successResponse([], null, Response::HTTP_NO_CONTENT);
     }
 
     public function delete(Category $category){
+        //todo: cascade update ???
+        $category->delete();
 
+        return $this->successResponse([], null, Response::HTTP_NO_CONTENT);
     }
 
     public function create(CreateCategoryRequest $request){
-        dd('create');
+        $category = Category::create($request->validated());
+
+        return $this->successResponse(['id' => $category->id], null, Response::HTTP_CREATED);
     }
 
 
