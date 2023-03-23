@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->string('type');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->string('contacts');
             $table->unsignedBigInteger('avatar_file_id');
             $table->unsignedBigInteger('ts_file_id');
