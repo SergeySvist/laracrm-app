@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
+use Storage;
 
 /**
  * App\Models\File
@@ -48,11 +49,15 @@ class File extends Model
     public function url(): Attribute{
         return Attribute::make(
             get: function (){
-                if(\Storage::exists($this->path))
+                if(Storage::exists($this->path))
                     return asset('storage/' . $this->path);
 
                 return self::DEFAULT_URL;
             }
         );
+    }
+
+    public function getAbsolutePath():string{
+        return Storage::disk()->path($this->path);
     }
 }

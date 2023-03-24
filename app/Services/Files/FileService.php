@@ -5,6 +5,7 @@ namespace App\Services\Files;
 use App\Exceptions\ApiBadRequestException;
 use App\Models\File;
 use Illuminate\Http\UploadedFile;
+use Storage;
 
 class FileService
 {
@@ -14,6 +15,13 @@ class FileService
     ];
 
     private ?AbstractFileHandler $fileHandler = null;
+
+
+    public function getStream(File $file){
+        if( Storage::exists($file->path))
+            return Storage::download($file->path, $file->original_name);
+        return null;
+    }
 
     public function delete(File $file){
         $this->getFileHandler($file->mine_type)->delete($file);

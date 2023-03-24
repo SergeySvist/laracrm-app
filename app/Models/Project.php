@@ -79,4 +79,9 @@ class Project extends Model
             get: fn() => $this->tsFile->url
         );
     }
+
+    public function getAllFiles(){
+        return File::whereIn('id', [$this->avatar_file_id, $this->ts_file_id])->get();
+    }
+
 }
