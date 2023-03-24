@@ -41,6 +41,10 @@ class Project extends Model
 {
     use HasFactory;
 
+    const DOWNLOAD_FILE_AVATAR = 'avatar';
+    const DOWNLOAD_FILE_TS = 'ts';
+    const DOWNLOAD_FILE_ZIP = 'zip';
+
     protected $fillable = [
         'type', 'description', 'contacts',
     ];

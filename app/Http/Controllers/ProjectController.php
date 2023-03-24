@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Project\CreateProjectRequest;
+use App\Http\Requests\Project\DownloadProjectRequest;
 use App\Models\Project;
 use App\Services\Files\FileService;
 use App\Traits\ApiResponser;
@@ -38,5 +39,9 @@ class ProjectController extends Controller
         $project->delete();
 
         return $this->successResponse([], null, Response::HTTP_NO_CONTENT);
+    }
+
+    public function download(Project $project, DownloadProjectRequest $request){
+        dd('test');
     }
 }

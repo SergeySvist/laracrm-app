@@ -19,4 +19,6 @@ Route::group(['prefix' => 'projects'], function (){
     Route::post('/', [ProjectController::class, 'create']);
     Route::delete('/{project}', [ProjectController::class, 'delete']);
 
+    Route::get('/{project}/download', [ProjectController::class, 'download']);
+
 });
