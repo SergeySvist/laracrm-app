@@ -15,6 +15,10 @@ class FileService
 
     private ?AbstractFileHandler $fileHandler = null;
 
+    public function delete(File $file){
+        $this->getFileHandler($file->mine_type)->delete($file);
+    }
+
     public function save(UploadedFile $uploadedFile){
         $path = $this->getFileHandler($uploadedFile->getClientMimeType())->store($uploadedFile);
 

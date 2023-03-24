@@ -28,6 +28,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Category whereId($value)
  * @method static Builder|Category whereTitle($value)
  * @method static Builder|Category whereUpdatedAt($value)
+ * @property-read Collection<int, \App\Models\SubCategory> $subCategories
  * @mixin Eloquent
  */
 class Category extends Model
