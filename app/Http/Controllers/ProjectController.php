@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Project\CreateProjectRequest;
 use App\Http\Requests\Project\DownloadProjectRequest;
+use App\Http\Requests\Project\PatchProjectRequest;
 use App\Models\Project;
 use App\Services\Files\FileService;
 use App\Services\Files\Zip\ZipService;
@@ -31,6 +32,18 @@ class ProjectController extends Controller
         $project->save();
 
         return $this->successResponse($project->toArray(), null, Response::HTTP_CREATED);
+    }
+
+    public function patch(Project $project, PatchProjectRequest $request, FileService $fileService){
+        $project->fill($request->validated());
+
+        if (isset($request['avatar'])){
+            $fileService->delete($project->avatarFile);
+
+            $file = $fileService->save($request['avatar']);
+            $project->avatar_file_id = $request['avatar'];
+        }
+        $project->save();
     }
 
     public function get(Project $project): JsonResponse{
