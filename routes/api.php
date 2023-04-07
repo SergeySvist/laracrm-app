@@ -10,7 +10,10 @@ Route::post('/signup', [AuthController::class, 'signup']);
 Route::post('/signin', [AuthController::class, 'signin']);
 
 Route::group(['middleware' => ['auth:sanctum']], function (){
+
+    Route::get('test', [\App\Http\Controllers\TestController::class, 'run']);
     Route::get('/signout', [AuthController::class, 'signout']);
+
 
 
     Route::group(['prefix' => 'categories'], function (){
